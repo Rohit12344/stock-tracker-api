@@ -1,90 +1,33 @@
-📈 Stock Tracker API
+📈 Stock Tracker API (Spring Boot)
 
-A Spring Boot backend service for fetching Indian stock market data, stock history, overviews, and managing user favorites.
+A backend API built using Spring Boot that fetches Indian stock market data, including real-time quotes, overviews, historical prices, and support for saving favorite stocks.
 
-🧭 Table of Contents
+🚀 Features
 
-Overview
+🔹 Fetch live stock data
 
-Features
+🔹 Fetch detailed stock overviews
 
-Architecture
+🔹 Get historical stock prices (default 30 days)
 
-Tech Stack
+🔹 Save favorite stocks
 
-Project Structure
+🔹 Clean REST API structure
 
-API Endpoints
+🔹 Integrates with external stock API using WebClient
 
-Setup & Installation
+🛠 Tech Stack
 
-Build & Run
+Java 17+
 
-Environment Variables
+Spring Boot
 
-Future Enhancements
+Spring WebFlux (WebClient)
 
-📘 Overview
+Maven
 
-This project is a Spring Boot–based stock tracking backend that integrates with an external Indian stock market API.
-It provides:
+H2 Database (optional for favorites)
 
-Live stock data
-
-Stock overviews
-
-Historical price charts
-
-Favorite stock management
-
-Clean, RESTful endpoints
-
-⭐ Features
-✔ Fetch real-time stock details
-✔ View stock overview & fundamentals
-✔ Fetch historical stock prices (daily OHLC)
-✔ Add user-favorite stocks
-✔ Built on reactive WebClient for external API calls
-✔ Clean Layered Architecture (Controller → Service → Client → DTOs)
-🏗 Architecture
-                       ┌──────────────────────────┐
-                       │    External Stock API     │
-                       └──────────────┬───────────┘
-                                      │
-                               WebClient Calls
-                                      │
-                   ┌──────────────────▼──────────────────┐
-                   │          StockClient                 │
-                   │  (Handles all external API calls)    │
-                   └──────────────────┬──────────────────┘
-                                      │
-                               Business Logic
-                                      │
-                   ┌──────────────────▼──────────────────┐
-                   │            StockService              │
-                   │  (Processing, mapping, validation)   │
-                   └──────────────────┬──────────────────┘
-                                      │
-                                 REST API Layer
-                                      │
-       ┌──────────────────────────────▼───────────────────────────────┐
-       │                        StockController                        │
-       └──────────────────────────────┬───────────────────────────────┘
-                                      │
-                                JSON Responses
-                                      │
-                    ┌─────────────────▼─────────────────┐
-                    │       Frontend / Mobile App       │
-                    └───────────────────────────────────┘
-
-🧰 Tech Stack
-Layer	Technology
-Language	Java 17+
-Framework	Spring Boot
-HTTP Client	Spring WebClient
-DB	(Optional) JPA/Hibernate if used for favorites
-Build Tool	Maven
-Deployment	Docker / AWS (optional)
 📂 Project Structure
 src/main/java/com/rohit/stock_tracker/
 │
@@ -113,60 +56,44 @@ src/main/java/com/rohit/stock_tracker/
 1. Get Stock Data
 GET /api/v1/stocks/{stockSymbol}
 
-
-Response: StockResponse
-
 2. Get Stock Overview
 GET /api/v1/stocks/{stockSymbol}/overview
-
-
-Response: StockOverviewResponse
 
 3. Get Stock History
 GET /api/v1/stocks/{stockSymbol}/history?days=30
 
 
-Response: List<DailyStockResponse>
+Optional query param:
+
+days — number of days (default 30)
 
 4. Add Favorite Stock
 POST /api/v1/stocks/favourites
 
 
-Request Body:
+Request body:
 
 {
   "symbol": "TCS"
 }
 
-⚙ Setup & Installation
-Prerequisites
+⚙️ Setup
+1. Clone the repository
+git clone https://github.com/<your-username>/stock-tracker-api.git
+cd stock-tracker-api
 
-Java 17+
+2. Add environment variables
 
-Maven 3.8+
+Create application.properties:
 
-Internet access (for external stock API)
-
-1️⃣ Clone the repository
-git clone https://github.com/your-username/stock-tracker.git
-cd stock-tracker
-
-2️⃣ Add environment variables
-
-Create application.properties or application.yml:
-
-indian.stock.api.base.url=<API_BASE_URL>
-indian.stock.api.key=<YOUR_API_KEY>
+indian.stock.api.base.url=YOUR_API_URL
+indian.stock.api.key=YOUR_API_KEY
 server.port=8080
 
-🏃 Build & Run
-Run using Maven
+▶️ Run the Application
+Using Maven:
 mvn spring-boot:run
 
-Build JAR
+Build JAR:
 mvn clean package
-
-
-Run it:
-
 java -jar target/stock-tracker-0.0.1-SNAPSHOT.jar
