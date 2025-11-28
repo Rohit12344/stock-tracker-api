@@ -16,41 +16,19 @@ A backend API built using Spring Boot that fetches Indian stock market data, inc
 
 🔹 Integrates with external stock API using WebClient
 
+
 🛠 Tech Stack
 
-Java 17+
+🔹 Java 17+
 
-Spring Boot
+🔹 Spring Boot
 
-Spring WebFlux (WebClient)
+🔹 Spring WebFlux (WebClient)
 
-Maven
+🔹 Maven
 
-H2 Database (optional for favorites)
+🔹 H2 Database (optional for favorites)
 
-📂 Project Structure
-src/main/java/com/rohit/stock_tracker/
-│
-├── controller/
-│   └── StockController.java
-│
-├── service/
-│   └── StockService.java
-│
-├── client/
-│   └── StockClient.java
-│
-├── dto/
-│   ├── StockResponse.java
-│   ├── StockOverviewResponse.java
-│   ├── DailyStockResponse.java
-│   └── FavoriteStockRequest.java
-│
-├── entity/
-│   └── FavoriteStock.java
-│
-└── config/
-    └── WebClientConfig.java
 
 📡 API Endpoints
 1. Get Stock Data
@@ -62,20 +40,16 @@ GET /api/v1/stocks/{stockSymbol}/overview
 3. Get Stock History
 GET /api/v1/stocks/{stockSymbol}/history?days=30
 
-
-Optional query param:
-
-days — number of days (default 30)
+    Optional query param:
+    days — number of days (default 30)
 
 4. Add Favorite Stock
 POST /api/v1/stocks/favourites
 
-
-Request body:
-
-{
-  "symbol": "TCS"
-}
+    Request body:
+    {
+      "symbol": "TCS"
+    }
 
 ⚙️ Setup
 1. Clone the repository
@@ -84,16 +58,16 @@ cd stock-tracker-api
 
 2. Add environment variables
 
-Create application.properties:
-
-indian.stock.api.base.url=YOUR_API_URL
-indian.stock.api.key=YOUR_API_KEY
-server.port=8080
+    Create application.properties:
+    
+    indian.stock.api.base.url=YOUR_API_URL
+    indian.stock.api.key=YOUR_API_KEY
+    server.port=8080
 
 ▶️ Run the Application
-Using Maven:
-mvn spring-boot:run
+    Using Maven:
+    mvn spring-boot:run
 
-Build JAR:
-mvn clean package
-java -jar target/stock-tracker-0.0.1-SNAPSHOT.jar
+    Build JAR:
+    mvn clean package
+    java -jar target/stock-tracker-0.0.1-SNAPSHOT.jar
