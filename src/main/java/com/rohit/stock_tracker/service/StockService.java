@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StockService {
@@ -26,6 +27,8 @@ public class StockService {
 
     public StockResponse getStockForSymbol(final String stockSymbol) {
         IndianStockAPIResponse response = stockClient.getStockQuote(stockSymbol);
+
+        System.out.println(stockSymbol);
 
         return StockResponse.builder().price(response.stockDetailsReusableData().price())
                 .lastTradingDate(response.stockDetailsReusableData().lastTradingDate())
@@ -61,5 +64,13 @@ public class StockService {
         FavoriteStock favorite = FavoriteStock.builder().symbol(symbol).build();
 
         return favoriteStockRepository.save(favorite);
+    }
+
+    public List<StockResponse> getFavoritesWithLivePrices() {
+        List<FavoriteStock> favorites = favoriteStockRepository.findAll();
+
+        return favorites.stream()
+                .map(fav -> getStockForSymbol(fav.getSymbol()))
+                .collect(Collectors.toList());
     }
 }

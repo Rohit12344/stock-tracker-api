@@ -16,6 +16,20 @@ public class StockClient {
     private final WebClient webClient;
 
     public IndianStockAPIResponse getStockQuote(String symbol) {
+//        String raw = webClient.get()
+//                .uri(uriBuilder -> uriBuilder
+//                        .path("/stock")
+//                        .queryParam("name", symbol)
+//                        .build())
+//                .retrieve()
+//                .bodyToMono(String.class)
+//                .block();
+//
+//        System.out.println(symbol);
+//        System.out.println("RAW API RESPONSE:");
+//        System.out.println(raw);
+
+        // Now map it
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/stock")

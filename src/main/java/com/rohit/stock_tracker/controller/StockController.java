@@ -6,6 +6,7 @@ import com.rohit.stock_tracker.dto.StockOverviewResponse;
 import com.rohit.stock_tracker.dto.StockResponse;
 import com.rohit.stock_tracker.entity.FavoriteStock;
 import com.rohit.stock_tracker.service.StockService;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,13 @@ public class StockController {
     }
 
     @PostMapping("/favourites")
-    public ResponseEntity<FavoriteStock> saveFavoriteStock(@RequestBody FavoriteStockRequest request) {
+    public ResponseEntity<@NonNull FavoriteStock> saveFavoriteStock(@RequestBody FavoriteStockRequest request) {
         final FavoriteStock saved = stockService.addFavorite(request.getSymbol());
         return ResponseEntity.ok(saved);
+    }
+
+    @GetMapping("/favorites")
+    public List<StockResponse> getFavoritesWithPrices() {
+        return stockService.getFavoritesWithLivePrices();
     }
 }
