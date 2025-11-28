@@ -45,8 +45,8 @@ GET /api/v1/stocks/{stockSymbol}/overview
 ```
 GET /api/v1/stocks/{stockSymbol}/history?days=30
 ```
-Optional query param:
-- days - number of days (default 30)
+>Optional query param:
+>- days - number of days (default 30)
 
 4. Add Favorite Stock
 ```
@@ -55,9 +55,14 @@ POST /api/v1/stocks/favourites
 Request body:
     ```
     {
-      "symbol": "TCS"
+      "symbol" : "TCS"
     }
     ```
+    
+5. Get Favorite Stocks
+```
+GET /api/v1/stocks/favourites
+```
 
 ## ⚙️ Setup
 1. Clone the repository
